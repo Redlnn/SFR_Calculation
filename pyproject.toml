@@ -1,0 +1,25 @@
+[project]
+name = "SFR_Calculation"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Redlnn", email = "w731347477@gmail.com"},
+]
+dependencies = [
+    "matplotlib~=3.6.3",
+    "numpy~=1.24.1",
+    "scipy~=1.10.0",
+    "opencv-python>=4.9.0.80",
+]
+requires-python = ">=3.10,<3.12"
+readme = "README.md"
+license = {text = "AGPL-3.0-Only"}
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "viztracer>=0.16.3",
+]
