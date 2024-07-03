@@ -11,8 +11,8 @@ import numpy as np
 from SFR import SFR
 
 ROI_SIZE = 70
-AOI_WIDTH = 30
-AOI_HEIGHT = 20
+AOI_LENGTH = 30
+AOI_WIDTH = 20
 
 orig_img = cv2.imread((Path('edge_samples') / '0007.png').as_posix())
 start_time = time.time()
@@ -89,7 +89,6 @@ for field in (0.3, 0.5, 0.75, 0.9):
     offset_y = int(offset * cos_height)
 
     # 图像中间左上角坐标
-    # TODO: 超出图像的话强行压回来
     pos_ul = 'UL', (center_x - offset_x, center_y - offset_y)
     pos_ur = 'UR', (center_x + offset_x, center_y - offset_y)
     pos_bl = 'BL', (center_x - offset_x, center_y + offset_y)
@@ -109,6 +108,7 @@ for field in (0.3, 0.5, 0.75, 0.9):
         )
 
 rect_size = 0
+delta = 0
 
 # 遍历ROI找角点，并以此找到AOI（单个TS方向）
 for i in rois:
@@ -143,6 +143,21 @@ for i in rois:
         x3, y3 = corners[2].ravel()
         x4, y4 = corners[3].ravel()
 
+        # test=========================
+        cv2.circle(
+            img, (i.lt_pos[0] + int(x1), i.lt_pos[1] + int(y1)), 2, (0, 0, 255), 2
+        )
+        cv2.circle(
+            img, (i.lt_pos[0] + int(x2), i.lt_pos[1] + int(y2)), 2, (0, 255, 0), 2
+        )
+        cv2.circle(
+            img, (i.lt_pos[0] + int(x3), i.lt_pos[1] + int(y3)), 2, (255, 0, 0), 2
+        )
+        cv2.circle(
+            img, (i.lt_pos[0] + int(x4), i.lt_pos[1] + int(y4)), 2, (255, 255, 0), 2
+        )
+        # test=========================
+
         distances: list[float] = [
             distance(x1, y1, x2, y2),
             distance(x1, y1, x3, y3),
@@ -151,32 +166,51 @@ for i in rois:
             distance(x2, y2, x4, y4),
             distance(x3, y3, x4, y4),
         ]
-
+        # 棋盘大小
         rect_size = int(np.min(distances))
+
+        AOI_LENGTH = int(rect_size / 3 * 2)
+        AOI_WIDTH = int(rect_size / 5 * 2)
+
+        delta = int(
+            np.min(np.abs([y2 - y1, y3 - y1, y4 - y1, x2 - x1, x3 - x1, x4 - x1]))
+        )
+
+        print(delta)
 
     x, y = corners[0].ravel()
     x, y = int(x), int(y)
 
-    _OFFSET = 10
+    # test=========================
+    x1, y1 = corners[0].ravel()
+    x2, y2 = corners[1].ravel()
+    x3, y3 = corners[2].ravel()
+    x4, y4 = corners[3].ravel()
+    cv2.circle(img, (i.lt_pos[0] + int(x1), i.lt_pos[1] + int(y1)), 2, (0, 0, 255), 2)
+    cv2.circle(img, (i.lt_pos[0] + int(x2), i.lt_pos[1] + int(y2)), 2, (0, 255, 0), 2)
+    cv2.circle(img, (i.lt_pos[0] + int(x3), i.lt_pos[1] + int(y3)), 2, (255, 0, 0), 2)
+    cv2.circle(img, (i.lt_pos[0] + int(x4), i.lt_pos[1] + int(y4)), 2, (255, 255, 0), 2)
+    # test=========================
+
     # 防止ROI选出ROI识别区域
     # 竖直方向超出
-    if int(i.lt_pos[1] + y - AOI_WIDTH - _OFFSET) > i.lt_pos[1]:
+    if i.lt_pos[1] + y - (rect_size / 2) - AOI_LENGTH / 2 > i.lt_pos[1]:
         _lt_pos = (
-            i.lt_pos[0] + x - AOI_HEIGHT // 3,
-            i.lt_pos[1] + y - AOI_WIDTH - _OFFSET,
+            int(i.lt_pos[0] + x - (delta / 2) - AOI_WIDTH / 2),
+            int(i.lt_pos[1] + y - (rect_size / 2) - AOI_LENGTH / 2),
         )
         _rb_pos = (
-            i.lt_pos[0] + x + AOI_HEIGHT - AOI_HEIGHT // 3,
-            i.lt_pos[1] + y - _OFFSET,
+            int(i.lt_pos[0] + x - (delta / 2) + AOI_WIDTH / 2),
+            int(i.lt_pos[1] + y - (rect_size / 2) + AOI_LENGTH / 2),
         )
     else:
         _lt_pos = (
-            i.lt_pos[0] + x - AOI_HEIGHT + AOI_HEIGHT // 3,
-            i.lt_pos[1] + y + _OFFSET,
+            int(i.lt_pos[0] + x + (delta / 2) - AOI_WIDTH / 2),
+            int(i.lt_pos[1] + y + (rect_size / 2) - AOI_LENGTH / 2),
         )
         _rb_pos = (
-            i.lt_pos[0] + x + AOI_HEIGHT // 3,
-            i.lt_pos[1] + y + AOI_WIDTH + _OFFSET,
+            int(i.lt_pos[0] + x + (delta / 2) + AOI_WIDTH / 2),
+            int(i.lt_pos[1] + y + (rect_size / 2) + AOI_LENGTH / 2),
         )
     i.s_aoi = AOI(
         lt_pos=_lt_pos,
@@ -185,23 +219,23 @@ for i in rois:
     )
 
     # 水平方向超出
-    if (i.lt_pos[0] + x - AOI_WIDTH - _OFFSET) > i.lt_pos[0]:
+    if (i.lt_pos[0] + x - (rect_size / 2) - AOI_LENGTH / 2) > i.lt_pos[0]:
         _lt_pos = (
-            i.lt_pos[0] + x - AOI_WIDTH - _OFFSET,
-            i.lt_pos[1] + y - AOI_HEIGHT + AOI_HEIGHT // 3,
+            int(i.lt_pos[0] + x - (rect_size / 2) - AOI_LENGTH / 2),
+            int(i.lt_pos[1] + y + (delta / 2) - AOI_WIDTH / 2),
         )
         _rb_pos = (
-            i.lt_pos[0] + x - _OFFSET,
-            i.lt_pos[1] + y + AOI_HEIGHT // 3,
+            int(i.lt_pos[0] + x - (rect_size / 2) + AOI_LENGTH / 2),
+            int(i.lt_pos[1] + y + (delta / 2) + AOI_WIDTH / 2),
         )
     else:
         _lt_pos = (
-            i.lt_pos[0] + x + _OFFSET,
-            i.lt_pos[1] + y - AOI_HEIGHT // 3,
+            int(i.lt_pos[0] + x + (rect_size / 2) - AOI_LENGTH / 2),
+            int(i.lt_pos[1] + y - (delta / 2) - AOI_WIDTH / 2),
         )
         _rb_pos = (
-            i.lt_pos[0] + x + AOI_WIDTH + _OFFSET,
-            i.lt_pos[1] + y + AOI_HEIGHT - AOI_HEIGHT // 3,
+            int(i.lt_pos[0] + x + (rect_size / 2) + AOI_LENGTH / 2),
+            int(i.lt_pos[1] + y - (delta / 2) + AOI_WIDTH / 2),
         )
     i.t_aoi = AOI(
         lt_pos=_lt_pos,
@@ -212,6 +246,7 @@ for i in rois:
 for i in rois:
     if TYPE_CHECKING:
         assert i.t_aoi and i.s_aoi
+    cv2.rectangle(img, i.lt_pos, i.rt_pos, (0, 0, 255), 2)
     cv2.rectangle(
         img,
         i.t_aoi.lt_pos,
