@@ -1,4 +1,5 @@
 reference/
+result*.json
 *.bmp
 *.png
 *.jpg

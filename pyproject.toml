@@ -2,18 +2,16 @@
 name = "SFR_Calculation"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Redlnn", email = "w731347477@gmail.com"},
-]
+authors = [{ name = "Redlnn", email = "w731347477@gmail.com" }]
 dependencies = [
-    "matplotlib~=3.6.3",
-    "numpy~=1.24.1",
-    "scipy~=1.10.0",
-    "opencv-python>=4.9.0.80",
+    "matplotlib>=3.9.1",
+    "numpy>=2.0.0",
+    "scipy>=1.14.0",
+    "opencv-python>=4.10.0.84",
 ]
-requires-python = ">=3.10,<3.12"
+requires-python = ">=3.10"
 readme = "README.md"
-license = {text = "AGPL-3.0-Only"}
+license = { text = "AGPL-3.0-Only" }
 
 
 [tool.pdm]
@@ -22,4 +20,36 @@ distribution = false
 [tool.pdm.dev-dependencies]
 dev = [
     "viztracer>=0.16.3",
+    "black>=24.4.2",
+    "isort>=5.13.2",
+    "ruff>=0.5.0",
 ]
+
+[tool.black]
+line-length = 120
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff.lint]
+extend-select = [
+    "E",  # pycodestyle
+    "F",  # Pyflakes
+    "UP",  # pyupgrade
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "SIM",  # flake8-simplify
+    # pydocstyle
+    #"D",
+]
+exclude = [
+    ".git",
+    ".venv",
+    "__pypackages__",
+    "dist",
+]
+ignore = ["F401", "E501"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

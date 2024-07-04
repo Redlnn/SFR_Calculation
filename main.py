@@ -1,42 +1,38 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-  # noqa: UP009
 import math
-import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Literal
+from typing import Literal
 
 import cv2
 import numpy as np
 
-from SFR import SFR
+# from SFR import SFR
 
-ROI_SIZE = 70
+ROI_SIZE = 50
 AOI_LENGTH = 30
 AOI_WIDTH = 20
 
-orig_img = cv2.imread((Path('edge_samples') / '0007.png').as_posix())
-start_time = time.time()
-is_gray_image = True if len(orig_img.shape) == 2 else False
 
-img = np.copy(orig_img)
-# if is_gray_image:
-#     img = np.copy(orig_img)
-# else:
-#     img = cv2.cvtColor(orig_img, cv2.COLOR_BGR2GRAY)
+orig_img = cv2.imread((Path('edge_samples') / '0007.png').as_posix())
+
+# is gray image?
+try:
+    gray_img = cv2.cvtColor(orig_img, cv2.COLOR_BGR2GRAY)
+except Exception:
+    gray_img = np.copy(orig_img)
 
 # 图片尺寸
-width = img.shape[1]
-height = img.shape[0]
-diagonal_length = math.sqrt(width**2 + height**2)
+IMG_WIDTH = orig_img.shape[1]
+IMG_HEIGHT = orig_img.shape[0]
+diagonal_length = math.sqrt(IMG_WIDTH**2 + IMG_HEIGHT**2)
 
 # 计算中心坐标
-center_x = width // 2
-center_y = height // 2
+center_x = IMG_WIDTH // 2
+center_y = IMG_HEIGHT // 2
 
-cos_height = (height**2 + diagonal_length**2 - width**2) / (
-    2 * height * diagonal_length
-)
-cos_width = (width**2 + diagonal_length**2 - height**2) / (2 * width * diagonal_length)
+cos_height = (IMG_HEIGHT**2 + diagonal_length**2 - IMG_WIDTH**2) / (2 * IMG_HEIGHT * diagonal_length)
+cos_width = (IMG_WIDTH**2 + diagonal_length**2 - IMG_HEIGHT**2) / (2 * IMG_WIDTH * diagonal_length)
 
 
 def distance(x1, y1, x2, y2):
@@ -59,9 +55,7 @@ class ROI:
     img: cv2.typing.MatLike
     lt_pos: tuple[int, int]
     rt_pos: tuple[int, int]
-    direction: (
-        Literal['C'] | Literal['UL'] | Literal['UR'] | Literal['BL'] | Literal['BR']
-    )
+    direction: Literal['C'] | Literal['UL'] | Literal['UR'] | Literal['BL'] | Literal['BR']
     field: float
     t_aoi: AOI | None = None
     s_aoi: AOI | None = None
@@ -70,7 +64,7 @@ class ROI:
 # 计算中心视场需要计算MTF的区域
 rois: list[ROI] = [
     ROI(
-        img=orig_img[
+        img=gray_img[
             center_y - ROI_SIZE : center_y + ROI_SIZE,
             center_x - ROI_SIZE : center_x + ROI_SIZE,
         ],
@@ -94,14 +88,20 @@ for field in (0.3, 0.5, 0.75, 0.9):
     pos_bl = 'BL', (center_x - offset_x, center_y + offset_y)
     pos_br = 'BR', (center_x + offset_x, center_y + offset_y)
 
-    for _direction, (_lt, _rb) in (pos_ul, pos_ur, pos_bl, pos_br):
+    for _direction, (cx, cy) in (pos_ul, pos_ur, pos_bl, pos_br):
+        if (ltx := cx - ROI_SIZE) < 0:
+            ltx = 0
+        if (rtx := cx + ROI_SIZE) > IMG_WIDTH:
+            rtx = IMG_WIDTH
+        if (lty := cy - ROI_SIZE) < 0:
+            lty = 0
+        if (rty := cy + ROI_SIZE) > IMG_HEIGHT:
+            rty = IMG_HEIGHT
         rois.append(
             ROI(
-                img=orig_img[
-                    _rb - ROI_SIZE : _rb + ROI_SIZE, _lt - ROI_SIZE : _lt + ROI_SIZE
-                ],
-                lt_pos=(_lt - ROI_SIZE, _rb - ROI_SIZE),
-                rt_pos=(_lt + ROI_SIZE, _rb + ROI_SIZE),
+                img=gray_img[lty:rty, ltx:rtx],
+                lt_pos=(ltx, lty),
+                rt_pos=(rtx, rty),
                 direction=_direction,
                 field=field,
             )
@@ -133,85 +133,104 @@ for i in rois:
 
     '''
     corners = cv2.goodFeaturesToTrack(
-        cv2.cvtColor(i.img, cv2.COLOR_BGR2GRAY), 4, 0.5, 5
+        i.img,
+        4,
+        0.3,
+        5,
     )
     # TODO: 占用时间长
+    # print(corners)
+    # cv2.imshow('1', i.img)
+    # cv2.waitKey()
+    # exit()
 
     if i.direction == 'C':
-        x1, y1 = corners[0].ravel()
-        x2, y2 = corners[1].ravel()
-        x3, y3 = corners[2].ravel()
-        x4, y4 = corners[3].ravel()
+        _xs = []
+        _ys = []
+        for _corner in corners:
+            _x, _y = _corner.ravel()
+            _xs.append(_x)
+            _ys.append(_y)
 
         # test=========================
-        cv2.circle(
-            img, (i.lt_pos[0] + int(x1), i.lt_pos[1] + int(y1)), 2, (0, 0, 255), 2
-        )
-        cv2.circle(
-            img, (i.lt_pos[0] + int(x2), i.lt_pos[1] + int(y2)), 2, (0, 255, 0), 2
-        )
-        cv2.circle(
-            img, (i.lt_pos[0] + int(x3), i.lt_pos[1] + int(y3)), 2, (255, 0, 0), 2
-        )
-        cv2.circle(
-            img, (i.lt_pos[0] + int(x4), i.lt_pos[1] + int(y4)), 2, (255, 255, 0), 2
-        )
+        for idx, _x in enumerate(_xs):
+            cv2.circle(
+                orig_img,
+                (i.lt_pos[0] + int(_x), i.lt_pos[1] + int(_ys[idx])),
+                2,
+                (0, 0, 255) if idx == 0 else (255, 0, 0),
+                2,
+            )
         # test=========================
 
-        distances: list[float] = [
-            distance(x1, y1, x2, y2),
-            distance(x1, y1, x3, y3),
-            distance(x1, y1, x4, y4),
-            distance(x2, y2, x3, y3),
-            distance(x2, y2, x4, y4),
-            distance(x3, y3, x4, y4),
-        ]
+        distances: list[float] = []
+        for idx in range(len(_xs)):
+            for _ in range(idx + 1, len(_xs)):
+                distances.append(distance(_xs[idx], _ys[idx], _xs[_], _ys[_]))
+
         # 棋盘大小
         rect_size = int(np.min(distances))
 
         AOI_LENGTH = int(rect_size / 3 * 2)
         AOI_WIDTH = int(rect_size / 5 * 2)
 
-        delta = int(
-            np.min(np.abs([y2 - y1, y3 - y1, y4 - y1, x2 - x1, x3 - x1, x4 - x1]))
-        )
+        _delta = []
+        for idx in range(1, len(_xs)):
+            _delta.append(_xs[idx] - _xs[0])
+            _delta.append(_ys[idx] - _ys[0])
 
-        print(delta)
+        delta = int(np.min(np.abs(_delta)))
 
+        print(f'delta:{delta}')
+
+    if corners is None:
+        continue
     x, y = corners[0].ravel()
     x, y = int(x), int(y)
 
     # test=========================
-    x1, y1 = corners[0].ravel()
-    x2, y2 = corners[1].ravel()
-    x3, y3 = corners[2].ravel()
-    x4, y4 = corners[3].ravel()
-    cv2.circle(img, (i.lt_pos[0] + int(x1), i.lt_pos[1] + int(y1)), 2, (0, 0, 255), 2)
-    cv2.circle(img, (i.lt_pos[0] + int(x2), i.lt_pos[1] + int(y2)), 2, (0, 255, 0), 2)
-    cv2.circle(img, (i.lt_pos[0] + int(x3), i.lt_pos[1] + int(y3)), 2, (255, 0, 0), 2)
-    cv2.circle(img, (i.lt_pos[0] + int(x4), i.lt_pos[1] + int(y4)), 2, (255, 255, 0), 2)
+    _xs = []
+    _ys = []
+    for _corner in corners:
+        _x, _y = _corner.ravel()
+        _xs.append(_x)
+        _ys.append(_y)
+
+    for idx, _x in enumerate(_xs):
+        cv2.circle(
+            orig_img,
+            (i.lt_pos[0] + int(_x), i.lt_pos[1] + int(_ys[idx])),
+            2,
+            (0, 0, 255) if idx == 0 else (255, 0, 0),
+            2,
+        )
     # test=========================
 
+    # 默认取所选点的上方和右方边缘
     # 防止ROI选出ROI识别区域
     # 竖直方向超出
-    if i.lt_pos[1] + y - (rect_size / 2) - AOI_LENGTH / 2 > i.lt_pos[1]:
-        _lt_pos = (
-            int(i.lt_pos[0] + x - (delta / 2) - AOI_WIDTH / 2),
-            int(i.lt_pos[1] + y - (rect_size / 2) - AOI_LENGTH / 2),
-        )
-        _rb_pos = (
-            int(i.lt_pos[0] + x - (delta / 2) + AOI_WIDTH / 2),
-            int(i.lt_pos[1] + y - (rect_size / 2) + AOI_LENGTH / 2),
-        )
+    if (_lty := int(i.lt_pos[1] + y - (rect_size / 2) - AOI_LENGTH / 2)) > i.lt_pos[1]:
+        if (_ltx := int(i.lt_pos[0] + x + (delta / 2) - AOI_WIDTH / 2)) < 0:
+            _ltx = 0
+        if (_rbx := int(i.lt_pos[0] + x + (delta / 2) + AOI_WIDTH / 2)) > IMG_WIDTH:
+            _rbx = IMG_WIDTH
+        if _lty < 0:
+            _lty = 0
+        if (_rby := int(i.lt_pos[1] + y - (rect_size / 2) + AOI_LENGTH / 2)) > IMG_HEIGHT:
+            _rby = IMG_HEIGHT
+        _lt_pos = (_ltx, _lty)
+        _rb_pos = (_rbx, _rby)
     else:
-        _lt_pos = (
-            int(i.lt_pos[0] + x + (delta / 2) - AOI_WIDTH / 2),
-            int(i.lt_pos[1] + y + (rect_size / 2) - AOI_LENGTH / 2),
-        )
-        _rb_pos = (
-            int(i.lt_pos[0] + x + (delta / 2) + AOI_WIDTH / 2),
-            int(i.lt_pos[1] + y + (rect_size / 2) + AOI_LENGTH / 2),
-        )
+        if (_ltx := int(i.lt_pos[0] + x - (delta / 2) - AOI_WIDTH / 2)) < 0:
+            _ltx = 0
+        if (_rbx := int(i.lt_pos[0] + x - (delta / 2) + AOI_WIDTH / 2)) > IMG_WIDTH:
+            _rbx = IMG_WIDTH
+        if (_lty := int(i.lt_pos[1] + y + (rect_size / 2) - AOI_LENGTH / 2)) < 0:
+            _lty = 0
+        if (_rby := int(i.lt_pos[1] + y + (rect_size / 2) + AOI_LENGTH / 2)) > IMG_HEIGHT:
+            _rby = IMG_HEIGHT
+        _lt_pos = (_ltx, _lty)
+        _rb_pos = (_rbx, _rby)
     i.s_aoi = AOI(
         lt_pos=_lt_pos,
         rt_pos=_rb_pos,
@@ -219,24 +238,28 @@ for i in rois:
     )
 
     # 水平方向超出
-    if (i.lt_pos[0] + x - (rect_size / 2) - AOI_LENGTH / 2) > i.lt_pos[0]:
-        _lt_pos = (
-            int(i.lt_pos[0] + x - (rect_size / 2) - AOI_LENGTH / 2),
-            int(i.lt_pos[1] + y + (delta / 2) - AOI_WIDTH / 2),
-        )
-        _rb_pos = (
-            int(i.lt_pos[0] + x - (rect_size / 2) + AOI_LENGTH / 2),
-            int(i.lt_pos[1] + y + (delta / 2) + AOI_WIDTH / 2),
-        )
+    if (_ltx := int(i.lt_pos[0] + x - (rect_size / 2) - AOI_LENGTH / 2)) > i.lt_pos[0]:
+        if _ltx < 0:
+            _ltx = 0
+        if (_rbx := int(i.lt_pos[0] + x - (rect_size / 2) + AOI_LENGTH / 2)) > IMG_WIDTH:
+            _rbx = IMG_WIDTH
+        if (_lty := int(i.lt_pos[1] + y - (delta / 2) - AOI_WIDTH / 2)) < 0:
+            _lty = 0
+        if (_rby := int(i.lt_pos[1] + y - (delta / 2) + AOI_WIDTH / 2)) > IMG_HEIGHT:
+            _rby = IMG_HEIGHT
+        _lt_pos = (_ltx, _lty)
+        _rb_pos = (_rbx, _rby)
     else:
-        _lt_pos = (
-            int(i.lt_pos[0] + x + (rect_size / 2) - AOI_LENGTH / 2),
-            int(i.lt_pos[1] + y - (delta / 2) - AOI_WIDTH / 2),
-        )
-        _rb_pos = (
-            int(i.lt_pos[0] + x + (rect_size / 2) + AOI_LENGTH / 2),
-            int(i.lt_pos[1] + y - (delta / 2) + AOI_WIDTH / 2),
-        )
+        if (_ltx := int(i.lt_pos[0] + x + (rect_size / 2) - AOI_LENGTH / 2)) < 0:
+            _ltx = 0
+        if (_rbx := int(i.lt_pos[0] + x + (rect_size / 2) + AOI_LENGTH / 2)) > IMG_WIDTH:
+            _rbx = IMG_WIDTH
+        if (_lty := int(i.lt_pos[1] + y + (delta / 2) - AOI_WIDTH / 2)) < 0:
+            _lty = 0
+        if (_rby := int(i.lt_pos[1] + y + (delta / 2) + AOI_WIDTH / 2)) > IMG_HEIGHT:
+            _rby = IMG_HEIGHT
+        _lt_pos = (_ltx, _lty)
+        _rb_pos = (_rbx, _rby)
     i.t_aoi = AOI(
         lt_pos=_lt_pos,
         rt_pos=_rb_pos,
@@ -244,27 +267,27 @@ for i in rois:
     )
 
 for i in rois:
-    if TYPE_CHECKING:
-        assert i.t_aoi and i.s_aoi
-    cv2.rectangle(img, i.lt_pos, i.rt_pos, (0, 0, 255), 2)
-    cv2.rectangle(
-        img,
-        i.t_aoi.lt_pos,
-        i.t_aoi.rt_pos,
-        (0, 255, 0),
-        2,
-    )
-    cv2.rectangle(
-        img,
-        i.s_aoi.lt_pos,
-        i.s_aoi.rt_pos,
-        (0, 255, 0),
-        2,
-    )
+    cv2.rectangle(orig_img, i.lt_pos, i.rt_pos, (0, 255, 255), 2)
+    if i.t_aoi and i.t_aoi:
+        cv2.rectangle(
+            orig_img,
+            i.t_aoi.lt_pos,
+            i.t_aoi.rt_pos,
+            (0, 255, 0),
+            2,
+        )
+    if i.s_aoi and i.s_aoi:
+        cv2.rectangle(
+            orig_img,
+            i.s_aoi.lt_pos,
+            i.s_aoi.rt_pos,
+            (0, 255, 0),
+            2,
+        )
 
 cv2.namedWindow("result", 0)
 cv2.resizeWindow("result", 1600, 1115)  # 设置窗口大小
-cv2.imshow('result', img)
+cv2.imshow('result', orig_img)
 # cv2.imwrite('test.png', rois[0].img)
 cv2.waitKey()
 
