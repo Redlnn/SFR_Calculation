@@ -1,0 +1,1102 @@
+********************************************************
+*                                                      *
+*                                                      *
+*                                                      *
+*                                                      *
+*                   sineMTF                            *
+*                                                      *
+*                   V6.6                               *
+*                                                      *
+*         Developed by The MITRE Corporation           *
+*                                                      *
+*                                                      *
+*                                                      *
+*                                                      *
+********************************************************
+
+
+
+  a      Output average MTF (in addition to peak MTF) 
+  b      Auto refine input corner coordinates 
+  c      Select I/O curve fit type for sine tgt (instead of autofit) 
+  d      Create diagnostic image (_box.tif) 
+  e      Verbose output 
+  f      Reverse image polarity 
+  g      Digital camera assessment 
+  j      Compare output to PIV spec 
+  k      Compare output to App. F spec 
+  p      Printer MTF assessment 
+  r      Help & Program Notice 
+
+Enter run options...or...Press RETURN if none:  aedk
+
+
+ Enter image filename:      	test.tif
+Enter target data filename:     tgt.txt
+
+     (ref: col,row = 0,0 at upper left corner of ENTIRE image,
+     cols increase left to right, rows increase top to bottom.)
+
+ Enter Col, Row for each of 3 gray patch corners:
+  lower right corner of the UPPER LEFT PATCH:   231 251
+  lower left corner of UPPER RIGHT PATCH:   1218 248
+  upper right corner of LOWER LEFT PATCH:   230 736
+ 
+ 
+ |||| |  |  | | |||| |  |  | | |||| 
+ |||| |  |  | | |||| |  |  | | |||| 
+ |||| |  |  | | |||| |  |  | | ||||        H
+ |||| |  |  | | |||| |  |  | | |||| 
+ |||| |  |  | | |||| |  |  | | |||| 
+ |||| |  |  | | |||| |  |  | | |||| 
+ 
+ 
+     ______________________ 
+     ______________________ 
+     ______________________ 
+     ______________________ 
+ 
+     ______________________ 
+ 
+ 
+     ______________________              V
+ 
+ 
+     ______________________ 
+ 
+     ______________________ 
+     ______________________ 
+     ______________________ 
+     ______________________ 
+ 
+Enter direction of sine wave,  H  or  V :   h
+ 
+
+EXTENDED output printed to MTFOUT file includes:
+    Sine Patch data
+    Aliasing data
+    Aliasing summary
+    Density Patch data
+    Gray-to-Reflectance curve
+
+Writing out diagnostic image (TIF): test_box.tif	Done
+
+	    End of Report for test.tif
+**********************************************************************************
+
+
+
+Process another image [y/n]?    n
+
+
+
+
+MTFOUT file:
+
+
+Mon May 02 18:56:55 2016	v6.6
+Target Serial Number is:	test
+Image input file name = 	test.tif
+Data input file name = 		tgt.txt
+
+Input coordinates of inner corners of target image:
+Upper Left Col =		231	Upper Left Row =	251
+Upper Right Col =		1218	Upper Right Row =	248
+Lower Left Col =		230	Lower Left Row =	736
+
+Input image columns = 1460, rows = 1005
+MTF direction = 	Horizontal
+Scanner resolution (pixels per inch):	HORZ = 501.209	VERT = 502.073
+Target Skew Angle:  HORZ = -0.174  VERT = 0.118   |avg.skew| = 0.028 degrees
+
+LINEAR REGRESSION (ImageGray vs TgtReflectance):
+slope = 327.342175  intercept = -6.827972  corrcoeff = 0.999404
+
+Density   Tgt     Tgt       Meas.     SmthSpline   LinReg    LinReg
+Patch   Density   Reflect   ImgGray   ImgGray      ImgGray   Error
+AVG      0.614    0.243      72.805     72.800     72.711     0.094
+B        0.510    0.309      93.748     93.750     94.330    -0.583
+C        0.416    0.384     119.335    119.335    118.776     0.559
+D        0.324    0.474     150.682    150.682    148.411     2.271
+E        0.253    0.558     177.026    177.026    175.983     1.043
+F        0.148    0.711     224.884    224.884    225.982    -1.098
+I        1.124    0.075      21.542     21.542     17.776     3.767
+J        1.041    0.091      25.062     25.063     22.957     2.105
+K        0.922    0.120      31.704     31.703     32.346    -0.642
+L        0.809    0.155      40.579     40.578     43.988    -3.409
+M        0.708    0.196      53.187     53.192     57.293    -4.107
+ImgGray-to-TgtReflect curve used: Smoothed Spline (program selected)
+AVG=avg of EquiDensityPatches: A G H N      MeasImgGray,TgtDensity pairs:
+     72.586, 0.612     75.310, 0.615     73.143, 0.627     70.184, 0.604
+
+Tgt Freq.   Effective     Target        peak MTF       avg MTF       Std Dev
+cy/mm       Freq.         Mod                                        avg MTF
+ 0.188       0.187        0.604          0.974          0.956          0.006
+ 0.250       0.250        0.589          0.976          0.962          0.005
+ 0.375       0.375        0.585          0.996          0.972          0.005
+ 0.500       0.500        0.570          0.960          0.944          0.004
+ 0.750       0.750        0.602          0.953          0.940          0.004
+ 1.000       1.000        0.589          0.966          0.945          0.019
+ 1.500       1.500        0.602          0.938          0.904          0.005
+ 2.000       2.000        0.631          0.905          0.868          0.011
+ 3.000       3.000        0.633          0.861          0.784          0.045
+ 4.000       4.000        0.635          0.822          0.757          0.028
+ 5.000       5.000        0.622          0.771          0.650          0.050
+ 6.000       6.000        0.627          0.669          0.552          0.039
+ 8.000       8.000        0.472          0.622          0.461          0.049
+10.000      10.000        0.380          0.258*         0.105*         0.023
+12.000		Sampled Beyond Nyquist Frequency
+
+			PROBLEM REPORT
+
+Appendix F spec check applied.
+*Aliasing from decimation detected
+ (See verbose output for details)
+
+
+
+
+	SINE PATCHES: IMAGE GRAY LEVEL STATISTICS
+
+* Sine peak & adjacent valley selected for Peak MTF
+
+Tgt cy/mm: 0.187500     effective cy/mm = 0.187500
+rows averaged for peak MTF: 50             sinepatch: 1
+Avg Image Mod = 0.576963     Std Dev = 0.006048
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  170*    2		   35     1
+	  169     2		   36*    2
+	  168     2		   37     5
+	  167     2		   38     4
+	  166     2
+	  163     2
+		
+
+Tgt cy/mm: 0.250000     effective cy/mm = 0.250000
+rows averaged for peak MTF: 50             sinepatch: 2
+Avg Image Mod = 0.566750     Std Dev = 0.004952
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  164     2		   35     1
+	  163     1		   36*   11
+	  162     1		   37     7
+	  161     6		   38     2
+	  160*    6
+	  159     1
+	  157     1
+	  155     3
+		
+
+Tgt cy/mm: 0.375000     effective cy/mm = 0.375000
+rows averaged for peak MTF: 50             sinepatch: 3
+Avg Image Mod = 0.568189     Std Dev = 0.004567
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  164     4		   35*    1
+	  163    11		   36     6
+	  162*    5		   37    16
+	  160     4		   38     1
+		
+
+Tgt cy/mm: 0.500000     effective cy/mm = 0.500000
+rows averaged for peak MTF: 50             sinepatch: 4
+Avg Image Mod = 0.538131     Std Dev = 0.003920
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  164     4		   38*    2
+	  163     4		   39    11
+	  162     4		   40    18
+	  161     8		   41     2
+	  160     6
+	  159*    2
+	  158     3
+	  156     1
+	  154     1
+		
+
+Tgt cy/mm: 0.750000     effective cy/mm = 0.750000
+rows averaged for peak MTF: 50             sinepatch: 5
+Avg Image Mod = 0.566307     Std Dev = 0.004292
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  159     1		   35*   17
+	  158     1		   36    12
+	  157*   10		   37     3
+	  156    11
+	  155     3
+	  154     2
+	  153     2
+	  152     2
+		
+
+Tgt cy/mm: 1.000000     effective cy/mm = 1.000000
+rows averaged for peak MTF: 50             sinepatch: 6
+Avg Image Mod = 0.556942     Std Dev = 0.018754
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  161     4		   36*    9
+	  160*   23		   37    25
+	  159    10		   38     9
+	  158     7		   39     1
+	  155     1		   40     1
+	  143     1		   46     1
+		
+
+Tgt cy/mm: 1.500000     effective cy/mm = 1.500000
+rows averaged for peak MTF: 41             sinepatch: 7
+Avg Image Mod = 0.544411     Std Dev = 0.005280
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  165     2		   36*    1
+	  164     2		   37     3
+	  163     4		   38    37
+	  162    12		   39    33
+	  161    15		   40    15
+	  160    10		   41     1
+	  159    14
+	  158    15
+	  157*    6
+	  156     4
+	  155     6
+		
+
+Tgt cy/mm: 2.000000     effective cy/mm = 2.000000
+rows averaged for peak MTF: 30             sinepatch: 8
+Avg Image Mod = 0.547455     Std Dev = 0.011125
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  158     6		   35*    4
+	  157*   18		   36    11
+	  156    22		   37    37
+	  155    13		   38    18
+	  154    23		   39    16
+	  153     3		   40     2
+	  152     3
+		
+
+Tgt cy/mm: 3.000000     effective cy/mm = 3.000000
+rows averaged for peak MTF: 20             sinepatch: 9
+Avg Image Mod = 0.496809     Std Dev = 0.044633
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  161     2		   38    10
+	  160*    6		   39*   20
+	  159    16		   40    36
+	  158    10		   41    28
+	  157    12		   42    29
+	  156    16		   43    20
+	  155    36		   44    15
+	  154    30		   45    13
+	  153    26		   46    13
+	  152    16		   47     4
+	  151    21		   48     1
+	  150     2		   49     3
+	  149     1		   59     1
+	  148     3		   62     1
+	  147     4		   66     1
+	  140     1		   71     1
+				   73     1
+				   75     1
+				   78     1
+				   79     1
+				   80     1
+				   85     1
+		
+
+Tgt cy/mm: 4.000000     effective cy/mm = 4.000000
+rows averaged for peak MTF: 15             sinepatch: 10
+Avg Image Mod = 0.480669     Std Dev = 0.027702
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  153     2		   37*    8
+	  152     8		   38    43
+	  151    22		   39    65
+	  150    26		   40    43
+	  149    46		   41    23
+	  148    40		   42    22
+	  147    40		   43    18
+	  146    30		   44    22
+	  145    44		   45    20
+	  144    26		   46    21
+	  143    22		   47    12
+	  142*   12		   48    17
+	  141    22		   49    12
+	  140    16		   50    22
+	  139     2		   51    12
+	  137     2
+		
+
+Tgt cy/mm: 5.000000     effective cy/mm = 4.999999
+rows averaged for peak MTF: 12             sinepatch: 11
+Avg Image Mod = 0.403974     Std Dev = 0.049568
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  150*    2		   41     2
+	  149     3		   42     6
+	  148    10		   43    26
+	  147    13		   44*   30
+	  146    23		   45    42
+	  145    34		   46    52
+	  144    66		   47    47
+	  143    42		   48    46
+	  142    48		   49    38
+	  141    46		   50    17
+	  140    40		   51    14
+	  139    30		   52    30
+	  138    32		   53    32
+	  137    46		   54    25
+	  136    34		   55    20
+	  135    22		   56    22
+	  134    13		   57    20
+	  133    21		   58    24
+	  132     9		   59    14
+	  131    10		   60    13
+	  130     9		   61    12
+	  129     2		   62    13
+				   63     6
+				   95     1
+				  101     1
+				  105     1
+				  106     1
+		
+
+Tgt cy/mm: 6.000000     effective cy/mm = 5.999999
+rows averaged for peak MTF: 10             sinepatch: 12
+Avg Image Mod = 0.345604     Std Dev = 0.039189
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  146     4		   47*   16
+	  145     1		   48    32
+	  144     2		   49    48
+	  143     8		   50    81
+	  142    22		   51    60
+	  141    17		   52    45
+	  140    26		   53    55
+	  139    33		   54    41
+	  138    49		   55    44
+	  137    56		   56    36
+	  136*   92		   57    32
+	  135    63		   58    19
+	  134    52		   59    38
+	  133    47		   60    38
+	  132    42		   61    13
+	  131    30		   62    22
+	  130    20		   63    36
+	  129    37		   64    22
+	  128    42		   65    26
+	  127    26		   66    28
+	  126    17		   67    20
+	  125    30		   68    19
+	  124    19		   69    16
+	  123    25		   70    12
+	  122     9		   71     5
+	  121    17		   72     1
+	  120     8		   73     1
+	  119     8		   76     2
+	  118     2		   82     2
+	  117     1		   87     1
+	  116     1		   90     1
+	  115     2		   92     1
+	  113     1		   95     1
+	  112     2		   97     2
+	  110     2		  100     1
+	  109     2		  102     1
+	  108     3		  105     1
+	  106     1
+		
+
+Tgt cy/mm: 8.000000     effective cy/mm = 7.999999
+rows averaged for peak MTF: 7             sinepatch: 13
+Avg Image Mod = 0.217518     Std Dev = 0.049430
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  134    12		   63     6
+	  133    18		   64    36
+	  132    36		   65    52
+	  131*   52		   66*   92
+	  130    70		   67   100
+	  129   104		   68   112
+	  128    82		   69    93
+	  127    99		   70    64
+	  126    93		   71    90
+	  125    66		   72    58
+	  124    62		   73    45
+	  123    53		   74    70
+	  122    67		   75    63
+	  121    58		   76    53
+	  120    61		   77    49
+	  119    66		   78    45
+	  118    49		   79    55
+	  117    63		   80    51
+	  116    43		   81    52
+	  115    52		   82    43
+	  114    43		   83    49
+	  113    34		   84    44
+	  112    48		   85    29
+	  111    42		   86    21
+	  110    30		   87    47
+	  109    30		   88    35
+	  108    32		   89    25
+	  107    17		   90    13
+	  106     9		   91     4
+	  105     8		   92     2
+	  104     6		   93     7
+	  103     3		   95     5
+	  102     4		   96     2
+	  101     3		   97     2
+	  100     3		   98     3
+	   99     2		   99     2
+				  100     1
+		
+
+Tgt cy/mm: 10.000000     effective cy/mm = 9.999999
+rows averaged for peak MTF: 6             sinepatch: 14
+Avg Image Mod = 0.039957     Std Dev = 0.022653
+Gray Level Histograms at Image Sine Peaks & Valleys:
+	    PEAK		    VALLEY
+	value count		value count
+	  119     8		   91*   10
+	  118    51		   92    12
+	  117    55		   93    38
+	  116    73		   94    43
+	  115    94		   95    52
+	  114   133		   96    92
+	  113*  224		   97    95
+	  112   190		   98   148
+	  111   237		   99   169
+	  110   313		  100   168
+	  109   315		  101   224
+	  108   248		  102   291
+	  107   160		  103   285
+	  106    95		  104   266
+	  105    57		  105   209
+	  104    12		  106   103
+	  103     2		  107    48
+				  108    12
+				  109     2
+		
+
+Tgt cy/mm: 12.000000     effective cy/mm = 11.999999
+
+ALIASING REPORT
+Aliasing from Decimation if: (sec/max) > TestValue
+ TestValue below Nyquist = 0.270000
+ TestValue above Nyquist = 0.450000
+Aliasing from Upscaling if max frequency is not expected frequency
+
+
+Tgt cy/mm: 0.187500     effective cy/mm = 0.187500
+
+Tgt cy/mm: 0.250000     effective cy/mm = 0.250000
+
+Tgt cy/mm: 0.375000     effective cy/mm = 0.375000
+
+Tgt cy/mm: 0.500000     effective cy/mm = 0.500000
+
+Tgt cy/mm: 0.750000     effective cy/mm = 0.750000
+
+Tgt cy/mm: 1.000000     effective cy/mm = 1.000000
+
+Tgt cy/mm: 1.500000     effective cy/mm = 1.500000
+
+Tgt cy/mm: 2.000000     effective cy/mm = 2.000000
+
+Tgt cy/mm: 3.000000     effective cy/mm = 3.000000
+max @  3.01   sec @  6.03   ratio 0.043
+              ter @  8.77   ratio 0.028
+max @  3.01   sec @  6.03   ratio 0.047
+              ter @  8.77   ratio 0.035
+max @  3.01   sec @  6.03   ratio 0.047
+              ter @  8.77   ratio 0.038
+max @  3.01   sec @  6.03   ratio 0.045
+              ter @  8.77   ratio 0.038
+max @  3.01   sec @  6.03   ratio 0.043
+              ter @  8.77   ratio 0.036
+max @  3.01   sec @  6.03   ratio 0.043
+              ter @  8.77   ratio 0.036
+max @  3.01   sec @  6.03   ratio 0.044
+              ter @  8.77   ratio 0.038
+max @  3.01   sec @  6.03   ratio 0.042
+              ter @  8.77   ratio 0.039
+max @  3.01   sec @  6.03   ratio 0.043
+              ter @  8.77   ratio 0.039
+
+Tgt cy/mm: 4.000000     effective cy/mm = 4.000000
+max @  4.00   sec @  8.00   ratio 0.068
+              ter @  8.80   ratio 0.007
+max @  4.00   sec @  8.00   ratio 0.062
+              ter @  0.80   ratio 0.006
+max @  4.00   sec @  8.00   ratio 0.063
+              ter @  8.80   ratio 0.007
+max @  4.00   sec @  8.00   ratio 0.062
+              ter @  1.07   ratio 0.013
+max @  4.00   sec @  8.00   ratio 0.054
+              ter @  0.53   ratio 0.014
+max @  4.00   sec @  8.00   ratio 0.047
+              ter @  0.80   ratio 0.011
+max @  4.00   sec @  8.00   ratio 0.048
+              ter @  0.80   ratio 0.009
+max @  4.00   sec @  8.00   ratio 0.044
+              ter @  0.80   ratio 0.010
+max @  4.00   sec @  8.00   ratio 0.043
+              ter @  9.33   ratio 0.006
+max @  4.00   sec @  8.00   ratio 0.044
+              ter @  1.60   ratio 0.013
+max @  4.00   sec @  8.00   ratio 0.037
+              ter @  1.87   ratio 0.007
+max @  4.00   sec @  8.00   ratio 0.031
+              ter @  1.07   ratio 0.007
+
+Tgt cy/mm: 5.000000     effective cy/mm = 4.999999
+max @  5.07   sec @  6.93   ratio 0.053
+              ter @  9.87   ratio 0.036
+max @  5.07   sec @  6.93   ratio 0.054
+              ter @  9.87   ratio 0.037
+max @  5.07   sec @  6.93   ratio 0.057
+              ter @  9.87   ratio 0.038
+max @  5.07   sec @  6.93   ratio 0.057
+              ter @  9.87   ratio 0.038
+max @  5.07   sec @  6.93   ratio 0.054
+              ter @  9.87   ratio 0.036
+max @  5.07   sec @  6.93   ratio 0.051
+              ter @  9.87   ratio 0.035
+max @  5.07   sec @  6.93   ratio 0.051
+              ter @  9.87   ratio 0.035
+max @  5.07   sec @  6.93   ratio 0.050
+              ter @  9.87   ratio 0.039
+max @  5.07   sec @  6.93   ratio 0.053
+              ter @  9.87   ratio 0.035
+max @  5.07   sec @  6.93   ratio 0.049
+              ter @  9.87   ratio 0.038
+max @  5.07   sec @  6.93   ratio 0.052
+              ter @  9.87   ratio 0.030
+max @  5.07   sec @  6.93   ratio 0.050
+              ter @  9.87   ratio 0.034
+max @  5.07   sec @  6.93   ratio 0.051
+              ter @  9.87   ratio 0.033
+max @  5.07   sec @  6.93   ratio 0.053
+              ter @  9.87   ratio 0.030
+max @  5.07   sec @  6.93   ratio 0.052
+              ter @  9.87   ratio 0.036
+
+Tgt cy/mm: 6.000000     effective cy/mm = 5.999999
+max @  5.97   sec @  7.79   ratio 0.043
+              ter @  4.93   ratio 0.036
+max @  5.97   sec @  7.79   ratio 0.047
+              ter @  8.31   ratio 0.020
+max @  5.97   sec @  7.79   ratio 0.045
+              ter @  8.57   ratio 0.019
+max @  5.97   sec @  7.79   ratio 0.041
+              ter @  8.31   ratio 0.024
+max @  5.97   sec @  7.79   ratio 0.042
+              ter @  8.57   ratio 0.021
+max @  5.97   sec @  7.79   ratio 0.038
+              ter @  8.31   ratio 0.026
+max @  5.97   sec @  8.57   ratio 0.024
+              ter @  9.09   ratio 0.019
+max @  5.97   sec @  7.53   ratio 0.035
+              ter @  8.57   ratio 0.023
+max @  5.97   sec @  1.82   ratio 0.021
+              ter @  1.04   ratio 0.017
+max @  5.97   sec @  7.53   ratio 0.036
+              ter @  1.82   ratio 0.022
+max @  5.97   sec @  9.87   ratio 0.020
+              ter @  8.31   ratio 0.020
+max @  5.97   sec @  1.82   ratio 0.024
+              ter @  8.57   ratio 0.019
+max @  5.97   sec @  7.53   ratio 0.036
+              ter @  1.04   ratio 0.022
+max @  5.97   sec @  1.82   ratio 0.027
+              ter @  0.78   ratio 0.022
+max @  5.97   sec @  7.53   ratio 0.037
+              ter @  4.41   ratio 0.021
+max @  5.97   sec @  7.53   ratio 0.033
+              ter @  1.04   ratio 0.021
+max @  5.97   sec @  0.78   ratio 0.025
+              ter @  1.82   ratio 0.018
+max @  5.97   sec @  7.53   ratio 0.031
+              ter @  1.04   ratio 0.022
+
+Tgt cy/mm: 8.000000     effective cy/mm = 7.999999
+max @  8.05   sec @  9.35   ratio 0.056
+              ter @  9.87   ratio 0.051
+max @  8.00   sec @  4.00   ratio 0.019
+              ter @  5.60   ratio 0.012
+max @  8.00   sec @  3.73   ratio 0.022
+              ter @  9.87   ratio 0.021
+max @  8.00   sec @  4.00   ratio 0.022
+              ter @  8.53   ratio 0.016
+max @  8.00   sec @  4.00   ratio 0.020
+              ter @  1.60   ratio 0.019
+max @  8.00   sec @  0.53   ratio 0.025
+              ter @  4.00   ratio 0.024
+max @  8.00   sec @  3.73   ratio 0.025
+              ter @  2.13   ratio 0.021
+max @  8.00   sec @  4.00   ratio 0.028
+              ter @  0.53   ratio 0.028
+max @  8.00   sec @  4.00   ratio 0.024
+              ter @  1.07   ratio 0.018
+max @  8.00   sec @  3.73   ratio 0.020
+              ter @  4.27   ratio 0.020
+max @  8.00   sec @  3.73   ratio 0.033
+              ter @  0.53   ratio 0.026
+max @  8.00   sec @  3.73   ratio 0.027
+              ter @  0.53   ratio 0.024
+max @  8.00   sec @  4.00   ratio 0.023
+              ter @  1.07   ratio 0.022
+max @  8.00   sec @  3.73   ratio 0.023
+              ter @  2.67   ratio 0.017
+max @  8.00   sec @  3.73   ratio 0.033
+              ter @  4.27   ratio 0.025
+max @  8.00   sec @  3.73   ratio 0.031
+              ter @  4.27   ratio 0.018
+max @  8.00   sec @  3.73   ratio 0.031
+              ter @  4.27   ratio 0.022
+max @  8.00   sec @  3.73   ratio 0.040
+              ter @  4.27   ratio 0.021
+max @  8.00   sec @  3.73   ratio 0.032
+              ter @  4.27   ratio 0.019
+max @  8.00   sec @  3.73   ratio 0.032
+              ter @  1.87   ratio 0.019
+max @  8.00   sec @  3.73   ratio 0.030
+              ter @  1.07   ratio 0.019
+max @  8.00   sec @  3.73   ratio 0.033
+              ter @  0.80   ratio 0.021
+max @  8.00   sec @  3.73   ratio 0.028
+              ter @  4.27   ratio 0.026
+max @  8.00   sec @  3.73   ratio 0.034
+              ter @  4.27   ratio 0.028
+max @  8.00   sec @  3.73   ratio 0.045
+              ter @  3.20   ratio 0.021
+
+Tgt cy/mm: 10.000000     effective cy/mm = 9.999999
+max @  9.87   sec @  6.23   ratio 0.524    DECIMATION
+              ter @  5.71   ratio 0.128
+max @  9.87   sec @  6.13   ratio 0.511    DECIMATION
+              ter @  8.80   ratio 0.082
+max @  9.87   sec @  6.13   ratio 0.541    DECIMATION
+              ter @  2.13   ratio 0.113
+max @  9.87   sec @  6.13   ratio 0.556    DECIMATION
+              ter @  8.53   ratio 0.104
+max @  9.87   sec @  6.13   ratio 0.582    DECIMATION
+              ter @  8.80   ratio 0.110
+max @  9.87   sec @  6.13   ratio 0.581    DECIMATION
+              ter @  8.80   ratio 0.122
+max @  9.87   sec @  6.13   ratio 0.594    DECIMATION
+              ter @  8.80   ratio 0.130
+max @  9.87   sec @  6.13   ratio 0.635    DECIMATION
+              ter @  3.73   ratio 0.120
+max @  9.87   sec @  6.13   ratio 0.612    DECIMATION
+              ter @  8.27   ratio 0.125
+max @  9.87   sec @  6.13   ratio 0.638    DECIMATION
+              ter @  2.13   ratio 0.119
+max @  9.87   sec @  6.13   ratio 0.624    DECIMATION
+              ter @  1.60   ratio 0.105
+max @  9.87   sec @  6.13   ratio 0.600    DECIMATION
+              ter @  8.53   ratio 0.129
+max @  9.87   sec @  6.13   ratio 0.605    DECIMATION
+              ter @  8.53   ratio 0.099
+max @  9.87   sec @  6.13   ratio 0.587    DECIMATION
+              ter @  3.47   ratio 0.103
+max @  9.87   sec @  6.13   ratio 0.586    DECIMATION
+              ter @  2.13   ratio 0.082
+max @  9.87   sec @  6.13   ratio 0.555    DECIMATION
+              ter @  1.60   ratio 0.076
+max @  9.87   sec @  6.13   ratio 0.526    DECIMATION
+              ter @  8.80   ratio 0.090
+max @  9.87   sec @  6.13   ratio 0.488    DECIMATION
+              ter @  8.00   ratio 0.071
+max @  9.87   sec @  6.13   ratio 0.517    DECIMATION
+              ter @  1.60   ratio 0.077
+max @  9.87   sec @  6.13   ratio 0.484    DECIMATION
+              ter @  1.07   ratio 0.057
+max @  9.87   sec @  6.13   ratio 0.487    DECIMATION
+              ter @  2.40   ratio 0.062
+max @  9.87   sec @  6.13   ratio 0.455    DECIMATION
+              ter @  2.13   ratio 0.074
+max @  9.87   sec @  6.13   ratio 0.452    DECIMATION
+              ter @  1.87   ratio 0.068
+max @  9.87   sec @  6.13   ratio 0.454    DECIMATION
+              ter @  2.13   ratio 0.089
+max @  9.87   sec @  6.13   ratio 0.461    DECIMATION
+              ter @  2.13   ratio 0.069
+max @  9.87   sec @  6.13   ratio 0.456    DECIMATION
+              ter @  2.13   ratio 0.088
+max @  9.87   sec @  6.13   ratio 0.452    DECIMATION
+              ter @  2.13   ratio 0.096
+max @  9.87   sec @  6.13   ratio 0.459    DECIMATION
+              ter @  2.13   ratio 0.084
+max @  9.87   sec @  6.13   ratio 0.453    DECIMATION
+              ter @  2.13   ratio 0.108
+max @  9.87   sec @  6.13   ratio 0.453    DECIMATION
+              ter @  2.13   ratio 0.070
+
+Tgt cy/mm: 12.000000     effective cy/mm = 11.999999
+
+
+Aliasing Summary
+
+Cy/mm      Cases     Avg      fraction of cases              Avg of cases
+                     Ratio      > TestValue                   > TestValue
+ 3.000         9     0.044              0.000
+ 4.000        12     0.050              0.000
+ 5.000        15     0.053              0.000
+ 6.000        18     0.034              0.000
+ 8.000        25     0.029              0.000
+10.000        30     0.531              1.000                    0.531
+
+All data for secondary ratios (not tertiary)
+
+
+
+	DENSITY PATCHES: IMAGE GRAY LEVEL STATISTICS
+
+Patch = A	low = 58 high = 102
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 72.731860 final mean = 72.585593
+	standard deviation after flier removal = 1.486356
+
+Patch = B	low = 77 high = 116
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 93.812408 final mean = 93.747671
+	standard deviation after flier removal = 1.990970
+
+Patch = C	low = 100 high = 142
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 119.445105 final mean = 119.334920
+	standard deviation after flier removal = 2.484485
+
+Patch = D	low = 122 high = 172
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 150.416848 final mean = 150.682105
+	standard deviation after flier removal = 3.009689
+
+Patch = E	low = 127 high = 203
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 177.255366 final mean = 177.025875
+	standard deviation after flier removal = 3.134953
+
+Patch = F	low = 195 high = 242
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 225.177493 final mean = 224.884237
+	standard deviation after flier removal = 2.691374
+
+Patch = G	low = 55 high = 113
+	total+fliers = 28260 total = 19217 fliers = 9043
+	first mean = 75.424720 final mean = 75.309622
+	standard deviation after flier removal = 1.959543
+
+Patch = H	low = 63 high = 96
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 73.275424 final mean = 73.142724
+	standard deviation after flier removal = 1.378305
+
+Patch = I	low = 17 high = 37
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 21.851115 final mean = 21.542434
+	standard deviation after flier removal = 1.125886
+
+Patch = J	low = 20 high = 39
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 25.230945 final mean = 25.062254
+	standard deviation after flier removal = 0.974022
+
+Patch = K	low = 26 high = 48
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 31.849567 final mean = 31.703943
+	standard deviation after flier removal = 1.080884
+
+Patch = L	low = 34 high = 62
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 40.826307 final mean = 40.579124
+	standard deviation after flier removal = 1.160557
+
+Patch = M	low = 43 high = 71
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 53.386058 final mean = 53.186659
+	standard deviation after flier removal = 1.234367
+
+Patch = N	low = 59 high = 96
+	total+fliers = 28417 total = 19324 fliers = 9093
+	first mean = 70.295517 final mean = 70.183658
+	standard deviation after flier removal = 1.609486
+
+GRAY-TO-REFLECTANCE VIA SMOOTHED SPLINE
+
+Gray     	Reflectance
+
+0		0.000000
+1		0.000000
+2		0.000000
+3		0.000000
+4		0.000000
+5		0.000387
+6		0.004907
+7		0.009428
+8		0.013948
+9		0.018468
+10		0.022989
+11		0.027509
+12		0.032030
+13		0.036550
+14		0.041070
+15		0.045591
+16		0.050111
+17		0.054632
+18		0.059152
+19		0.063672
+20		0.068193
+21		0.072713
+22		0.077233
+23		0.081748
+24		0.086244
+25		0.090711
+26		0.095139
+27		0.099525
+28		0.103873
+29		0.108184
+30		0.112462
+31		0.116706
+32		0.120921
+33		0.125104
+34		0.129252
+35		0.133357
+36		0.137416
+37		0.141422
+38		0.145370
+39		0.149254
+40		0.153069
+41		0.156808
+42		0.160470
+43		0.164052
+44		0.167554
+45		0.170976
+46		0.174317
+47		0.177575
+48		0.180751
+49		0.183844
+50		0.186852
+51		0.189775
+52		0.192613
+53		0.195365
+54		0.198031
+55		0.200617
+56		0.203131
+57		0.205584
+58		0.207982
+59		0.210336
+60		0.212654
+61		0.214945
+62		0.217217
+63		0.219480
+64		0.221743
+65		0.224013
+66		0.226300
+67		0.228613
+68		0.230960
+69		0.233351
+70		0.235794
+71		0.238297
+72		0.240870
+73		0.243522
+74		0.246257
+75		0.249071
+76		0.251957
+77		0.254911
+78		0.257925
+79		0.260996
+80		0.264117
+81		0.267281
+82		0.270485
+83		0.273721
+84		0.276983
+85		0.280267
+86		0.283567
+87		0.286876
+88		0.290189
+89		0.293501
+90		0.296805
+91		0.300095
+92		0.303367
+93		0.306614
+94		0.309831
+95		0.313013
+96		0.316163
+97		0.319281
+98		0.322369
+99		0.325428
+100		0.328460
+101		0.331466
+102		0.334447
+103		0.337406
+104		0.340343
+105		0.343260
+106		0.346158
+107		0.349038
+108		0.351903
+109		0.354754
+110		0.357591
+111		0.360417
+112		0.363232
+113		0.366039
+114		0.368838
+115		0.371632
+116		0.374421
+117		0.377207
+118		0.379991
+119		0.382776
+120		0.385561
+121		0.388348
+122		0.391138
+123		0.393931
+124		0.396727
+125		0.399527
+126		0.402332
+127		0.405141
+128		0.407955
+129		0.410776
+130		0.413602
+131		0.416435
+132		0.419276
+133		0.422124
+134		0.424979
+135		0.427844
+136		0.430718
+137		0.433601
+138		0.436493
+139		0.439397
+140		0.442311
+141		0.445237
+142		0.448174
+143		0.451124
+144		0.454086
+145		0.457062
+146		0.460051
+147		0.463054
+148		0.466072
+149		0.469106
+150		0.472154
+151		0.475219
+152		0.478300
+153		0.481396
+154		0.484506
+155		0.487631
+156		0.490768
+157		0.493918
+158		0.497080
+159		0.500253
+160		0.503435
+161		0.506628
+162		0.509829
+163		0.513038
+164		0.516254
+165		0.519476
+166		0.522705
+167		0.525938
+168		0.529176
+169		0.532417
+170		0.535661
+171		0.538907
+172		0.542155
+173		0.545403
+174		0.548650
+175		0.551897
+176		0.555143
+177		0.558386
+178		0.561626
+179		0.564863
+180		0.568097
+181		0.571328
+182		0.574556
+183		0.577781
+184		0.581004
+185		0.584223
+186		0.587441
+187		0.590656
+188		0.593868
+189		0.597078
+190		0.600285
+191		0.603490
+192		0.606694
+193		0.609894
+194		0.613093
+195		0.616290
+196		0.619485
+197		0.622678
+198		0.625869
+199		0.629058
+200		0.632246
+201		0.635432
+202		0.638617
+203		0.641800
+204		0.644981
+205		0.648162
+206		0.651340
+207		0.654518
+208		0.657695
+209		0.660870
+210		0.664044
+211		0.667218
+212		0.670390
+213		0.673562
+214		0.676733
+215		0.679903
+216		0.683073
+217		0.686242
+218		0.689410
+219		0.692578
+220		0.695746
+221		0.698913
+222		0.702080
+223		0.705247
+224		0.708413
+225		0.711580
+226		0.714747
+227		0.717913
+228		0.721080
+229		0.724247
+230		0.727413
+231		0.730580
+232		0.733747
+233		0.736913
+234		0.740080
+235		0.743247
+236		0.746413
+237		0.749580
+238		0.752747
+239		0.755913
+240		0.759080
+241		0.762247
+242		0.765413
+243		0.768580
+244		0.771747
+245		0.774913
+246		0.778080
+247		0.781247
+248		0.784413
+249		0.787580
+250		0.790746
+251		0.793913
+252		0.797080
+253		0.800246
+254		0.803413
+255		0.806580
+
+         End of Report for test.tif
+********************************************************************************
+
+

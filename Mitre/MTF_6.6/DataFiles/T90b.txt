@@ -1,0 +1,131 @@
+# for 15-bar "T90" target, design "b" 
+
+# Caution: "T90" design is not standard; 
+# bar locations or cy/mm may be different from those assumed here.
+# To verify compatibility of this file with your target image:
+# select option "d" when running mtf program; view .box image generated
+
+T90-15bar   # target serial number
+
+12    # total number of density patches + sine patterns 
+
+17.633      # target width in mm  
+17.633    # target height in mm   
+
+# Sine Patterns Follow:
+
+1        # label
+b        # signifies bar pattern
+0        # UL pattern corner in mm from left edge of target
+0        # UL pattern corner in mm from top edge of target
+14.5     # pattern width in mm
+5.       # pattern height in mm
+1.       # target modulation
+1.       # frequency in cycles/mm
+
+2
+b
+0
+6
+11.518
+3.972
+1.
+1.25893
+
+3
+b
+0 
+10.972
+9.149
+3.155
+1.
+1.58489
+
+4
+b
+0
+15.127
+7.267
+2.506
+1.
+1.99526
+
+5
+b
+11.86
+15.6425
+5.773
+1.9905
+1.
+2.51189
+
+6
+b
+13.048
+13.5614
+4.585
+1.5811
+1.
+3.16228
+
+7
+b
+13.991
+11.8055
+3.642
+1.2559
+1.
+3.98107
+
+8
+b
+14.74
+10.3079
+2.893
+0.9976
+1.
+5.01187
+
+9
+b
+15.335
+9.0155
+2.298
+0.7924
+1.
+6.30957
+
+10
+b
+15.8076
+7.886
+1.8254
+0.6295
+1.
+7.94328
+
+11
+b
+16.183
+6.886
+1.45   
+0.5
+1.
+10.
+
+12
+b
+11.0744
+10.8712
+1.45     
+0.5
+1.
+10.      # T-90 tgt contains 2 separate 10 cy/mm patterns
+
+
+
+
+
+
+
+

@@ -1,0 +1,377 @@
+
+# This data file contains the dimensions and calibration data for a specific
+# transmission (film) sine wave target produced by Sine Patterns, LLC
+# (Rochester, NY), their catalog number M-6, which has a maximum sine frequency
+# of 80 cy/mm.  It consists of 14 density patches
+# and 22 sine wave frequency patterns.  
+# The patch densities and sine modulations in this data file
+# must be changed for each target serial number for target type M-6;
+# the dimensional data will remain constant for all serial numbered M6 targets.
+
+# The patch and pattern dimensions and locations in this data file are with
+# respect to the program's internal 'standard' target orientation, which is
+# horizontal, with the whitest density patch on the top side:
+
+#   A      B      C      D      E      F      G      (density patch row)
+#   4  5  6  8  10  12 ......................80      (cy/mm of sine pattern row)
+#   3  2.5  2   1.5    1.0     .75   .50   .375      (cy/mm of sine pattern row)
+#   N      M      L      K      J      I      H      (density patch row)
+
+
+# Above is the program's internal standard orientation only; the target
+# can be scanned in any orientation (horizontal or vertical) and at any
+# skew angle; the MTF program will automatically re-orientate the scanned target
+# into its internal standard orientation.
+
+# Note! depending on how the M6 film target is imaged, the image may be
+# left/right reversed from above graphic; in this case either left/right
+# reverse the image prior to processing in sinemtf (using this data file)
+# or left/right reverse the patch & pattern locations in this data file.
+
+
+###############################################################################
+#
+#     START OF DATA
+#
+###############################################################################
+
+99999   # target serial number
+
+27    # total number of density patches + sine patterns in this file
+
+70.0  # width of target in millimeters
+46.0  # height of target in millimeters
+
+# 1st density patch
+A     # label for this patch
+d     # signifies a density patch - the remaining 7 entries all must be FLOAT
+0.0   # upper left corner of patch in mm from left edge of target area(column)
+0.0   # upper left corner of patch in mm from top edge of target area (row)
+9.7  # patch width in mm
+10.  # patch height in mm
+1.   # manufacturer-supplied density of patch
+
+#2nd density patch
+B
+d
+10.0
+0.0
+9.7
+10.
+1.
+
+#3rd density patch
+C
+d
+20.0
+0.0
+9.7
+10.
+1.
+
+#4th density patch
+D
+d
+30.0
+0.0
+9.7
+10.
+1.
+
+#5th density patch
+E
+d
+40.0
+0.0
+9.7
+10.
+1.
+
+#6th density patch
+F
+d
+50.0
+0.0
+9.7
+10.
+1.
+
+#7th density patch
+G
+d
+60.0
+0.0
+9.7
+10.
+1.
+
+#8th density patch
+H
+d
+60.0
+36.
+9.7
+10.
+1.
+
+#9th density patch
+I
+d
+50.0
+36.
+9.7
+10.
+1.
+
+#10th density patch
+J
+d
+40.0
+36.
+9.7
+10.
+1.
+
+#11th density patch
+K
+d
+30.0
+36.
+9.7
+10.
+1.
+
+#12th density patch
+L
+d
+20.0
+36.
+9.7
+10.
+1.
+
+#13th density patch
+M
+d
+10.0
+36.
+9.7
+10.
+1.
+
+#14th density patch
+N
+d
+0.0
+36.
+9.7
+10.
+1.
+
+#1st sine pattern
+1     # label
+s     # signifies a sine wave pattern
+55.   # upper left corner of pattern in mm from left edge of target area(column)
+24.0  # upper left corner of pattern in mm from top edge of target area (row)
+9.7   # pattern width in mm
+10.   # pattern height in mm
+1.0   # manufacturer-supplied target modulation
+.375   # sine wave cycles/mm
+
+#2nd sine pattern
+2
+s
+45.
+24.0
+9.7
+10.
+1.  
+.5
+
+#3rd sine pattern
+3
+s
+35.
+24.0
+9.7
+10.
+1.   
+.75
+
+#4th sine pattern
+4
+s
+25.
+24.0
+9.7
+10.
+1.
+1.
+
+#5th sine pattern
+5
+s
+15.
+24.0
+9.7
+10.
+1.   
+1.5
+
+#6th sine pattern
+6
+s
+10.0
+24.0
+4.7
+10.
+1.
+2.
+
+#7th sine pattern
+7
+S
+5.0
+24.0
+4.7
+10.
+1.
+2.5
+
+#8th sine pattern
+8
+s
+0.0
+24.0
+4.7
+10.
+1.
+3.0
+
+#9th sine pattern
+9
+s
+0.0
+12.0
+4.7
+10.
+1.
+4.0
+
+#10th sine pattern
+10
+s
+5.0
+12.0
+4.7
+10.
+1.
+5.0
+
+#11th sine pattern
+11
+s
+10.0
+12.0
+4.7
+10.
+1.
+6.0
+
+#12th sine pattern
+12
+s
+15.0
+12.0
+4.7
+10.
+1.
+8.0
+
+#13th sine pattern
+13
+s
+20.0
+12.0
+4.7
+10.
+1.
+10.0      # higher tgt frequencies left out of this file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

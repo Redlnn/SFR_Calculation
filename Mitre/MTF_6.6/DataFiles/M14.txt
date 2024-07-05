@@ -1,0 +1,327 @@
+#  This data file contains the dimensions and calibration data for a specific
+# transmission (film) sine wave target produced by Sine Patterns, LLC
+# (Penfield, NY), their catalog number M-14, which has a maximum sine frequency
+# of 128 cy/mm.  It consists of 12 density patches and 19 sine wave frequency
+# patterns. The patch densities and sine modulations in this data file
+#  must be changed for each target serial number for target type M-14.
+# The dimensional data will remain constant for all serial number M-14 targets.
+# The patch, pattern dimensions and locations in this data file are with
+# respect to the program's internal 'standard' target orientation, which is
+# horizontal, with the whitest density patch on the top right side:
+#       A      B      C      D      E      F        (density patch row)
+#   10  12 . . . . . . . . . . . . . . . . . 128    (cy/mm of sine pattern row)
+#    8   6   5   4     3.0    2.0        1.0        (cy/mm of sine pattern row)
+#       L      K      J      I      H      G        (density patch row)
+# NOTE!! Other target labeling sequences for the density patches may be
+# different from that given here. The data in this file must be consistant with
+# the labeling used above. If the image of scanned target has the whitest gray
+# patch on the upper left side (instead of upper right side), then before
+# running MTF program, the image must be transposed left/right so that the
+# white patch is on the upper right side. Above is the program's internal
+# standard orientation only. The target can be scanned in any orientation
+# (horizontal or vertical) and at any skew angle. The program will automatic-
+# ally re-orientate the scanned target into its internal standard orientation.
+###############################################################################
+#     START OF DATA
+###############################################################################
+999   # target serial number
+31    # total number of density patches + sine patterns (an integer!)
+12    # width of target in millimeters
+13    # height of target in millimeters
+# 1st density patch
+A
+d     # signifies a density patch
+0.00  # upper left corner of patch in mm from left edge of target area(column)
+0.00  # upper left corner of patch in mm from top edge of target area (row)
+2.00  # patch width in mm
+3.00  # patch height in mm
+1.0  # manufacturer-supplied density of patch
+
+# 2nd density patch
+B
+d
+2.00
+0.00
+2.00
+3.00
+1.0  
+
+# 3rd density patch
+C
+d
+4.00
+0.00
+2.00
+3.00
+1.0  
+
+# 4th density patch
+D
+d
+6.00
+0.00
+2.00
+3.00
+1.0  
+
+# 5th density patch
+E
+d
+8.00
+0.00
+2.00
+3.00
+1.0  
+
+# 6th density patch
+F
+d
+10.0
+0.00
+2.00
+3.00
+1.0  
+
+# 7th density patch
+G
+d
+10.0
+9.75
+2.00
+3.00
+1.0  
+
+# 8th density patch
+H
+d
+8.00
+9.75
+2.00
+3.00
+1.0  
+
+# 9th density patch
+I
+d
+6.00
+9.75
+2.00
+3.00
+1.0  
+
+#10th density patch
+J
+d
+4.00
+9.75
+2.00
+3.00
+1.00
+
+#11th density patch
+K
+d
+2.00
+9.75
+2.00
+3.00
+1.0  
+
+#12th density patch
+L
+d
+0.00
+9.75
+2.00
+3.00
+1.0  
+
+# 1st sine pattern
+1     # label
+s     # signifies a sine wave pattern
+8.5   # upper left corner of pattern in mm from left edge of target area(column)
+6.5   # upper left corner of pattern in mm from top edge of target area (row)
+5.0   # pattern width in mm
+3.0   # pattern height in mm
+1.0  # manufacturer-supplied target modulation
+1.0   # sine wave cycles/mm
+
+# 2nd sine pattern
+2
+s
+6.00
+6.50
+2.50
+3.00
+1.0  
+2
+
+# 3rd sine pattern
+3
+s
+3.50
+6.50
+2.50
+3.00
+1.0  
+3
+
+# 4th sine pattern
+4
+s
+2.25
+6.50
+1.25
+3.00
+1.0  
+4
+
+# 5th sine pattern
+5
+s
+1.00
+6.50
+1.25
+3.00
+1.0  
+5
+
+# 6th sine pattern
+6
+s
+-0.25
+6.50
+1.25
+3.00
+1.0  
+6
+
+# 7th sine pattern
+7
+s
+-1.50
+6.50
+1.25
+3.00
+1.0  
+8
+
+# 8th sine pattern
+8
+s
+-1.50
+3.25
+1.25
+3.00
+1.0  
+10
+
+# 9th sine pattern
+9
+s
+-0.25
+3.25
+1.25
+3.00
+1.0  
+12
+
+#10th sine pattern
+10
+s
+1.00
+3.25
+1.25
+3.00
+1.0  
+16
+
+#11th sine pattern
+11
+s
+2.25
+3.25
+1.25
+3.00
+1.0  
+20
+
+#12th sine pattern
+12
+s
+3.50
+3.25
+1.25
+3.00
+1.0  
+24
+
+#13th sine pattern
+13
+s
+4.75
+3.25
+1.25
+3.00
+1.0  
+32
+
+#14th sine pattern
+14
+s
+6.00
+3.25
+1.25
+3.00
+1.0  
+40
+
+#15th sine pattern
+15
+s
+7.25
+3.25
+1.25
+3.00
+1.0  
+48
+
+#16th sine pattern
+16
+s
+8.50
+3.25
+1.25
+3.00
+1.0  
+64
+
+#17th sine pattern
+17
+s
+9.75
+3.25
+1.25
+3.00
+1.0  
+80
+
+#18th sine pattern
+18
+s
+11.0
+3.25
+1.25
+3.00
+1.0  
+96
+
+#19th sine pattern
+19
+s
+12.25
+3.25
+1.25
+3.00
+1.0  
+128

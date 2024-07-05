@@ -1,0 +1,284 @@
+# This data file contains the dimensions and calibration data for a specific
+# photo paper sine wave target produced by Sine Patterns, LLC
+# (Rochester, NY), their catalog number M13-60-1X, which has a maximum sine
+# frequency of 12 cy/mm.  It consists of 14 density patches
+# and 15 sine wave frequency patterns.  
+# The patch densities and sine modulations in this data file
+# must be changed for each target serial number for target type M13-60-1X;
+# Dimensional data remains constant for all serial numbered M13-60-1X targets.
+
+# The patch and pattern dimensions and locations in this data file are with
+# respect to the program's internal 'standard' target orientation, which is
+# horizontal, with the whitest density patch on the top side:
+
+#   A      B      C      D      E      F      G      (density patch row)
+#  .75     1     1.5   2  3   4  5   6  8   10  12   (cy/mm of sine pattern row)
+#   .5       .375          .25          .1875        (cy/mm of sine pattern row)
+#   N      M      L      K      J      I      H      (density patch row)
+
+
+# Above is the program's internal standard orientation only; the target
+# can be scanned in any orientation (horizontal or vertical) and at any
+# skew angle; the MTF program will automatically re-orientate the scanned target
+# into its internal standard orientation.
+
+
+
+###########     START OF DATA    ##############################
+
+99999          # target serial number
+
+29    # total number of density patches + sine patterns (an integer !)
+
+70.0  # width of target in millimeters
+47.5  # height of target in millimeters
+
+A     # label for this patch
+d     # signifies a density patch - the remaining 7 entries all must be FLOAT
+0.0   # upper left corner of patch in mm from left edge of target area(column)
+0.0   # upper left corner of patch in mm from top edge of target area (row)
+9.95  # patch width in mm
+11.45 # patch height in mm
+1.  # manufacturer-supplied density of patch
+
+B
+d
+10.0
+0.0
+9.95
+11.45
+1.        #density of patch B
+
+C
+d
+20.0
+0.0
+9.95
+11.45
+1.        #density of patch C
+
+D
+d
+30.0
+0.0
+9.95
+11.45
+1.        #density of patch D
+
+E
+d
+40.0
+0.0
+9.95
+11.45
+1.        #density of patch E
+
+F
+d
+50.0
+0.0
+9.95
+11.45
+1.        #density of patch F (whitest patch)
+
+G
+d
+60.0
+0.0
+9.95
+11.40
+1.        #density of patch G
+
+H
+d
+60.0
+36.0
+9.95
+11.45
+1.        #density of patch H
+
+I
+d
+50.0
+36.0
+9.95
+11.45
+1.        #density of patch I (darkest patch)
+
+J
+d
+40.0
+36.0
+9.95
+11.45
+1.        #density of patch J
+
+K
+d
+30.0
+36.0
+9.95
+11.45
+1.        #density of patch K
+
+L
+d
+20.0
+36.0
+9.95
+11.45
+1.        #density of patch L
+
+M
+d
+10.0
+36.0
+9.95
+11.45
+1.        #density of patch M
+
+N
+d
+0.0
+36.0
+9.95
+11.45
+1.        #density of patch N
+
+#1st sine pattern
+1     # label
+s     # signifies a sine wave pattern
+50.0  # upper left corner of pattern in mm from left edge of target area(column)
+24.0  # upper left corner of pattern in mm from top edge of target area (row)
+19.90 # pattern width in mm
+11.45 # pattern height in mm
+1.    # manufacturer-supplied "compensated modulation" of the pattern
+.1875 # sine wave cycles/mm
+
+2
+s
+30.0
+24.0
+19.9
+11.45
+1.       #modulation of 0.25 cy/mm
+.25
+
+3
+s
+15.0
+24.0
+14.9
+11.45
+1.       #modulation of 0.375 cy/mm
+.375
+
+4
+s
+0.0
+24.0
+14.9
+11.45
+1.       #modulation of 0.5 cy/mm
+0.5
+
+5
+s
+0.0
+12.0
+9.90
+11.50
+1.       #modulation of 0.75 cy/mm
+.75
+
+6
+s
+10.0
+12.0
+9.90
+11.50
+1.       #modulation of 1.0 cy/mm
+1.0
+
+7
+S
+20.0
+12.0
+9.90
+11.50
+1.       #modulation of 1.5 cy/mm
+1.5
+
+8
+s
+30.0
+12.0
+4.9
+11.50
+1.       #modulation of 2.0 cy/mm
+2.0
+
+9
+s
+35.0
+12.0
+4.9
+11.50
+1.       #modulation of 3.0 cy/mm
+3.0
+
+10
+s
+40.0
+12.0
+4.9
+11.50
+1.       #modulation of 4.0 cy/mm
+4.0
+
+11
+s
+45.0
+12.0
+4.9
+11.50
+1.       #modulation of 5.0 cy/mm
+5.0
+
+12
+s
+50.0
+12.0
+4.9
+11.50
+1.       #modulation of 6.0 cy/mm
+6.0
+
+13
+s
+55.0
+12.0
+4.9
+11.50
+1.       #modulation of 8.0 cy/mm
+8.0
+
+14
+s
+60.0
+12.0
+4.9
+11.50
+1.       #modulation of 10.0 cy/mm
+10.0
+
+15
+s
+65.0
+12.0
+4.9
+11.50
+1.       #modulation of 12.0 cy/mm
+12.0
+
+

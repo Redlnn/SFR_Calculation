@@ -1,0 +1,124 @@
+# for 15-bar "T90" target, design "a"
+
+# Caution: "T90" design is not standard; 
+# bar locations or cy/mm may be different from those assumed here.
+# To verify compatibility of this file with your target image:
+# select option "d" when running mtf program; view .box image generated
+
+T90-15bar   # target serial number
+
+12    # number of bar patterns (no density patches in bar tgt processing)
+
+17.633     # target width in mm
+17.633    # target height in mm 
+
+# Bar Patterns Follow:
+
+1        # label
+b        # signifies bar pattern
+0.       # UL pattern corner in mm from left edge of target
+0.       # UL pattern corner in mm from top edge of target
+14.5     # pattern width in mm
+5.       # pattern height in mm
+1.       # target modulation
+1.       # frequency in cycles/mm
+
+2	         # label
+b	         # signifies bar pattern
+0.	         # UL pattern corner in mm from left edge of target
+6.	         # UL pattern corner in mm from top edge of target
+11.518	         # pattern width in mm
+3.972	         # pattern height in mm
+1.	         # target modulation
+1.25893	         # frequency in cycles/mm
+
+3	         # label
+b	         # signifies bar pattern
+0.	         # UL pattern corner in mm from left edge of target
+10.972	         # UL pattern corner in mm from top edge of target
+9.149	         # pattern width in mm
+3.155	         # pattern height in mm
+1.	         # target modulation
+1.58489	         # frequency in cycles/mm	
+
+4	         # label
+b	         # signifies bar pattern
+0.	         # UL pattern corner in mm from left edge of target
+15.127	         # UL pattern corner in mm from top edge of target
+7.267	         # pattern width in mm
+2.506	         # pattern height in mm
+1.	         # target modulation
+1.99526	         # frequency in cycles/mm
+
+5	         # label
+b	         # signifies bar pattern
+11.86	         # UL pattern corner in mm from left edge of target
+15.7435        # UL pattern corner in mm from top edge of target
+5.773	         # pattern width in mm
+1.9905	         # pattern height in mm 
+1.	         # target modulation
+2.51189	         # frequency in cycles/mm
+
+6	         # label
+b	         # signifies bar pattern
+13.048	         # UL pattern corner in mm from left edge of target
+13.2134	         # UL pattern corner in mm from top edge of target
+4.585	         # pattern width in mm
+1.5811	         # pattern height in mm
+1.	         # target modulation
+3.16228	         # frequency in cycles/mm
+
+7	         # label
+b	         # signifies bar pattern
+13.991	         # UL pattern corner in mm from left edge of target
+10.9575	         # UL pattern corner in mm from top edge of target
+3.642	         # pattern width in mm
+1.2559	         # pattern height in mm
+1.	         # target modulation
+3.98107	         # frequency in cycles/mm
+
+8	         # label
+b	         # signifies bar pattern
+14.74	         # UL pattern corner in mm from left edge of target
+8.96	         # UL pattern corner in mm from top edge of target
+2.893	         # pattern width in mm
+0.9976	         # pattern height in mm
+1.	         # target modulation
+5.01187	         # frequency in cycles/mm
+
+9	         # label
+b	         # signifies bar pattern
+15.335	         # UL pattern corner in mm from left edge of target
+7.1675	         # UL pattern corner in mm from top edge of target
+2.298	         # pattern width in mm
+0.7924	         # pattern height in mm
+1.	         # target modulation
+6.30957	         # frequency in cycles/mm
+
+10	         # label
+b	         # signifies bar pattern
+15.8076	         # UL pattern corner in mm from left edge of target
+5.538	         # UL pattern corner in mm from top edge of target
+1.8254	         # pattern width in mm
+0.6295	         # pattern height in mm
+1.	         # target modulation
+7.94328	         # frequency in cycles/mm
+
+11	         # label
+b	         # signifies bar pattern
+16.183	     # UL pattern corner in mm from left edge of target
+4.038	     # UL pattern corner in mm from top edge of target
+1.45	     # pattern width in mm
+0.5	         # pattern height in mm
+1.	         # target modulation
+10.	         # frequency in cycles/mm
+
+12	         # label
+b	         # signifies bar pattern
+10.55	     # UL pattern corner in mm from left edge of target
+11.478	     # UL pattern corner in mm from top edge of target
+1.45	     # pattern width in mm
+0.5	         # pattern height in mm
+1.	         # target modulation
+10.      	 # frequency in cycles/mm (there are two 10cy/mm patterns)
+

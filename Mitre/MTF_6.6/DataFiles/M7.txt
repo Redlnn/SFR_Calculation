@@ -1,0 +1,290 @@
+# M-7 Film Target(22 x 30 mm) 
+# Caution: measurements in this file are not exact, 
+# taken from image of tgt, not tgt itself
+
+# This data file contains the dimensions and calibration data for a specific
+# transmission (film) sine wave target produced by Sine Patterns, LLC
+# (Penfield, NY), their catalog number M-7, which has a maximum sine frequency
+# of 128 cy/mm.  It consists of 14 density patches and 21 sine wave frequency
+# patterns. The patch densities and sine modulations in this data file
+# must be changed for each target serial number for target type M-7;
+# the dimensional data will remain constant for all serial number targets.
+
+# The patch and pattern dimensions and locations in this data file are with
+# respect to the program's internal 'standard' target orientation, which is
+# horizontal, with the whitest density patch (F) on the TOP RIGHT side:
+
+#   A      B      C      D      E      F      G      (density patch row)
+#   10 12 ................................. 128      (cy/mm of sine pattern row)
+#   8  6  5  4   3   2     1.5      1.0     .75      (cy/mm of sine pattern row)
+#   N      M      L      K      J      I      H      (density patch row)
+
+# NOTE!! Origin (0,0) must be defined as upper left corner of gray patch A,
+# then leftmost column of sine pattern at 8 & 10 cy/mm is NEGATIVE
+# (which is OK)
+
+#  NOTE!! Target manufacturer labeling sequence for the density patches
+# may be different from that given here; the labeling sequence given here
+# must be used in this data file.
+# NOTE!!!  If the displayed (horizontal) image of scanned M-7 target
+# has the whitest gray patch on upper left side (instead of upper right
+# side), then before running MTF program, you must perform a left/right
+# transposition of the image, to get white patch on upper right side.
+
+#  NOTE!! Density patch sizes and positions were derived via calipers for 
+# one instance of an M-7 target from Applied Imaging.  The pattern positions
+# and sizes in the vertical direction did not match expectations from delivered 
+# documentation.  Sizes/positions of the first 10 sine patches are approximately
+# correct.  Data for last 11 sine patches is unconfirmed.
+
+# Above is the program's internal standard orientation only; the target
+# can be scanned in any orientation (horizontal or vertical) and at any
+# skew angle; the MTF program will automatically re-orientate the scanned target
+# into its internal standard orientation.
+
+###############################################################################
+#
+#     START OF DATA
+#
+###############################################################################
+000   # target serial number
+25    # total number of density patches + sine patterns (an integer !)
+28.0 # width of target in millimeters
+22.0 # height of target in millimeters
+
+# 1st density patch
+G     # label for this patch
+d     # signifies a density patch - the remaining 7 entries all must be FLOAT
+0.0   # upper left corner of patch in mm from left edge of target area(column)
+0.0   # upper left corner of patch in mm from top edge of target area (row)
+3.9   # patch width in mm
+5.35  # patch height in mm
+1.    # manufacturer-supplied density of patch
+
+#2nd density patch
+F
+d
+4.02
+0.0
+3.9
+5.35
+1. 
+
+#3rd density patch
+E
+d
+8.03
+0.0
+3.9
+5.35
+1. 
+
+#4th density patch
+D
+d
+12.05
+0.0
+3.9
+5.35
+1.  
+
+#5th density patch
+C
+d
+16.07
+0.0
+3.9
+5.35
+1.  
+
+#6th density patch
+B
+d
+20.08
+0.0
+3.9
+5.35
+1.  
+
+#7th density patch
+A
+d
+24.1
+0.0
+3.9
+5.35
+1. 
+
+#8th density patch
+N
+d
+24.1
+16.65
+3.9
+5.35
+1.  
+
+#9th density patch
+M
+d
+20.08
+16.65
+3.9
+5.35
+1. 
+
+#10th density patch
+L
+d
+16.07
+16.65
+3.9
+5.35
+1. 
+
+#11th density patch
+K
+d
+12.05
+16.65
+3.9
+5.35
+1.  
+
+#12th density patch
+J
+d
+8.03
+16.65
+3.9
+5.35
+1.  
+
+#13th density patch
+I
+d
+4.02
+16.65
+3.9
+5.35
+1.  
+
+#14th density patch
+H
+d
+0.0
+16.65
+3.9
+5.35
+1.
+
+#1st sine pattern
+1     # label
+s     # signifies a sine wave pattern
+23.0 # upper left corner of pattern in mm from left edge of targetarea(column)
+11.1  # upper left corner of pattern in mm from top edge of target area (row)
+5.0   # pattern width in mm
+5.35   # pattern height in mm
+1.  # manufacturer-supplied target modulation
+.75  # sine wave cycles/mm
+
+#2nd sine pattern
+2
+s
+18.0
+11.1
+5.0
+5.35
+1.
+1.0
+
+#3rd sine pattern
+3
+s
+13.0
+11.1
+5.0
+5.35
+1.
+1.5
+
+#4th sine pattern
+4
+s
+10.5
+11.1
+2.5
+5.35
+1.
+2.0
+
+#5th sine pattern
+5
+s
+8.00
+11.1
+2.5
+5.35
+1.
+3.0
+
+#6th sine pattern
+6
+s
+5.5
+11.1
+2.5
+5.35
+1.
+4.0
+
+#7th sine pattern
+7
+S
+3.0
+11.1
+2.5
+5.35
+1.
+5.0
+
+#8th sine pattern
+8
+s
+0.5
+11.1
+2.5
+5.35
+1.  
+6.0
+
+#9th sine pattern
+9
+S
+-2.0
+11.0
+2.5
+5.35
+1.
+8.0
+
+#10 sine pattern
+10
+S
+-2.0
+5.55
+2.5
+5.35
+1.
+10.0
+
+#11th sine pattern
+11
+s
+0.5
+5.55
+2.5
+5.35
+1.
+12.0
+
